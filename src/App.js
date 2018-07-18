@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TweenLite } from "gsap";
-// import './App.css';
+import './App.css';
 // import logo from './logo.svg';
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div className="container">
         <section className="intro" ref={this.intro}>
-          <p>A long time ago, in a galaxy far,<br /> far away....
+          <p>A long time ago, in a galaxy far,<br /> far away...
           </p>
         </section>
       </div>
