@@ -6,8 +6,9 @@ import logo from './logo.svg';
 class App extends Component {
   constructor(props){
     super(props);
-    this.intro = React.createRef(); // shiny new React 16.3 ref API!
+    this.intro = React.createRef(); 
     this.logo = React.createRef();
+    this.content = React.createRef();
   }
 
   componentDidMount() {
@@ -20,7 +21,8 @@ class App extends Component {
           scale: 0.05,
           ease: Power2.easeOut
         })
-        .to(this.logo.current, 1.5, { opacity: 0 }, "-=1.5");
+        .to(this.logo.current, 1.5, { opacity: 0 }, "-=1.5")
+        .to(this.content.current, 200, { top: "-170%" });
     }
 
   render() {
@@ -30,7 +32,7 @@ class App extends Component {
           <p>A long time ago, in a galaxy far,<br /> far away...
           </p>
         </section>
-        
+
         <section className="logo" ref={this.logo}>
           <img src={logo} alt="Code Wars logo" />
         </section>
