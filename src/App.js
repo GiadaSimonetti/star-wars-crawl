@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import { Power2, TimelineLite } from "gsap";
 import './App.css';
 import logo from './logo.svg';
+import volumeOff from "./volume_off.svg";
+import volumeOn from "./volume_on.svg";
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.intro = React.createRef(); 
+    this.intro = React.createRef();
     this.logo = React.createRef();
     this.content = React.createRef();
+    this.audio = React.createRef();
+
+    this.state = {
+      muted: true
+    };
   }
 
   componentDidMount() {
@@ -23,6 +30,15 @@ class App extends Component {
         })
         .to(this.logo.current, 1.5, { opacity: 0 }, "-=1.5")
         .to(this.content.current, 200, { top: "-170%" });
+    }
+
+    onVolumeClick = () => {
+      if (this.state.muted) {
+        this.audio.current.muted = false;
+      } else {
+        this.audio.current.muted = true;
+      }
+      this.setState({ muted: !this.state.muted });
     }
 
   render() {
@@ -48,6 +64,25 @@ class App extends Component {
             <p>The Developer has sent his most daring editor theme on a secret mission to the production branch, where an old ally has discovered a clue to the Lead’s whereabouts....</p>
           </div>
         </section>
+
+        <audio ref={this.audio} muted>
+          <source
+            type="audio/mpeg"
+            src="https://ia801307.us.archive.org/28/items/JohnWilliamsStarWarsMainThemeFULL/John%20Williams%20-%20Star%20Wars%20Main%20Theme%20(FULL).mp3"
+            />
+        </audio>
+        <button
+          className="volume"
+          type="button"
+          onClick= {this.onVolumeClick}
+        >
+          {this.state.muted ? (
+            <img src={volumeOff} alt="Volume is off" />
+          ) : (
+            <img src={volumeOn} alt="Volume is on" />
+          )}
+        </button>
+
       </div>
     );
   }
